@@ -12,6 +12,10 @@ angular.module('tvshowmarkApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/zoom', {
+        templateUrl: 'views/zoom.html',
+        controller: 'ZoomCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
