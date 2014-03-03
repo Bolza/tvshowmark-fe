@@ -387,7 +387,7 @@ Refuel.define('TVSApp',{require: ['GenericModule', 'ListModule', 'DataSource', '
             e.module.classList.add('showContext');
             setTimeout(function() {
                 e.module.classList.remove('showContext');
-            } ,5000)
+            } ,5000);
         });
         app.defineAction('hideContext', function(e) {
              e.module.classList.remove('showContext');

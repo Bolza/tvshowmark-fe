@@ -10,10 +10,10 @@ angular.module('tvshowmarkApp')
 				$rootScope.$broadcast('toZoom', scope.item);
 			}
 			scope.plan = function() {
-				$rootScope.$broadcast('seriesEvent', {'item': scope.item, 'action': 'plan', 'list': scope.listName});
+				$rootScope.$broadcast('DashboardEvent', {'item': scope.item, 'action': 'plan', 'list': scope.listName});
 			}
 			scope.drop = function() {
-				$rootScope.$broadcast('seriesEvent', {'item': scope.item, 'action': 'clear', 'list': scope.listName});
+				$rootScope.$broadcast('DashboardEvent', {'item': scope.item, 'action': 'clear', 'list': scope.listName});
 			}
 		}
 	};

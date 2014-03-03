@@ -4,8 +4,7 @@
 <div id="center" class="page">
 	<h3>main</h3>
 	<ul>
-		<series ng-repeat="item in list | filter:dashType track by item.id" thisseries="item"></series>
+		<series ng-repeat="item in list.results | filter:dashType track by item.tvdb_id" thisseries="item"></series>
 	</ul>
 </div>
 
-<div id="left"  ng-include="'views/zoom.html'"></div>

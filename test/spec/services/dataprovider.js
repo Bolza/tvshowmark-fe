@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: Dataprovider', function () {
+describe('Service: dataprovider', function () {
 
   // load the service's module
   beforeEach(module('tvshowmarkApp'));
 
   // instantiate service
-  var Dataprovider;
-  beforeEach(inject(function (_Dataprovider_) {
-    Dataprovider = _Dataprovider_;
+  var dataprovider;
+  beforeEach(inject(function (_dataprovider_) {
+    dataprovider = _dataprovider_;
   }));
 
   it('should do something', function () {
-    expect(!!Dataprovider).toBe(true);
+    expect(!!dataprovider).toBe(true);
   });
 
 });

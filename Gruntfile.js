@@ -6,7 +6,9 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
-
+var mountFolder = function (connect, dir) {
+    return connect.static(require('path').resolve(dir));
+};
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -65,8 +67,22 @@ module.exports = function (grunt) {
         hostname: '0.0.0.0',
         livereload: 35729
       },
+      proxies: [
+          {
+              context: '/api/v1/user/dashboard/',
+              host: 'http://0.0.0.0:9000/mock/dashboard.json'
+              
+          }
+      ],
       livereload: {
         options: {
+          middleware: function (connect) {
+              return [
+                  require('grunt-connect-proxy/lib/utils').proxyRequest,
+                  mountFolder(connect, '.tmp'),
+                  mountFolder(connect, 'app')
+              ];
+          },
           open: true,
           base: [
             '.tmp',
@@ -332,6 +348,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'configureProxies',
       'bower-install',
       'concurrent:server',
       'autoprefixer',

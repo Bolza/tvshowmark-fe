@@ -1,6 +1,6 @@
 <div id="tops" class="page" ng-controller="TopsCtrl">
 	<h3>tops</h3>
 	<ul>
-  		<series ng-repeat="item in list" thisseries="item"></series>
+  		<series ng-repeat="item in list.results track by item.tvdb_id" thisseries="item"></series>
   	</ul>
 </div>

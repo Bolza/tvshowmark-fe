@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.controller('TopsCtrl', function ($rootScope, $scope, Dataprovider) {
+.controller('TopsCtrl', function ($rootScope, $scope, Dashboard) {
 	$scope.offlineCapable = false;
-	$scope.listName = 'UserList';
-	$scope.list = Dataprovider.getUserSeries();
+	$scope.listName = 'Dashboard';
+	$scope.list = Dashboard.get();
+	
+	
+
 });

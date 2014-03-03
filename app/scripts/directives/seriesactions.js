@@ -6,10 +6,10 @@ angular.module('tvshowmarkApp')
 		restrict: 'E',
 		link: function postLink(scope, element, attrs) {
 			scope.drop = function() {
-				$rootScope.$broadcast('seriesEvent', {'item': scope.item, 'action': 'clear', 'list': scope.listName});
+				$rootScope.$broadcast('DashboardEvent', {'item': scope.item, 'action': 'clear', 'list': scope.listName});
 			};
 			scope.watch = function() {
-				$rootScope.$broadcast('seriesEvent', {'item': scope.item, 'action': 'watch', 'list': scope.listName});
+				$rootScope.$broadcast('DashboardEvent', {'item': scope.item, 'action': 'watch', 'list': scope.listName});
 			}
 			
 		}

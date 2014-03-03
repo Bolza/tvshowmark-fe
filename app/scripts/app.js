@@ -12,7 +12,7 @@ angular.module('tvshowmarkApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/zoom', {
+      .when('/zoom/:tvdb_id', {
         templateUrl: 'views/zoom.html',
         controller: 'ZoomCtrl'
       })

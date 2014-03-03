@@ -1,7 +1,8 @@
 html {
   height: 100%;
 }
-
+a {color: inherit;}
+a:hover {color: inherit;}
 body {
   height: 100%;
   width: 100%;
@@ -25,7 +26,21 @@ body {
 }
 ul {padding: 5px;}
 plan, drop {float:right; padding: 2px; display: block; border: 1px solid black;}
-.series {display: block; position: relative; height: 35px;}
+.series, episode {
+  display: block; 
+  position: relative; 
+  height: 35px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: normal;
+}
+label {
+  font-weight: normal;
+}
+
+.watched {
+  font-weight: bold;
+}
 
 #tops {background: green;  left: 0;}
 #center {background: purple;  left: 300px;}

@@ -1,5 +1,5 @@
 <div class="series">
-	<label ng-click="zoom()">{{item.name}} {{(item.state)}}</label>
+	<a href="#/zoom/{{item.tvdb_id}}">{{item.title}} {{(item.user.status)}}</a>
 	<drop  ng-click="drop()">drop</drop>
 	<plan  ng-click="plan()">plan</plan>
 </div>
