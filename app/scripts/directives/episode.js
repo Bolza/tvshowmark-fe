@@ -12,9 +12,9 @@ angular.module('tvshowmarkApp')
 		link: function postLink(scope, element, attrs) {
 			scope.swatch = function() {
 				if (!scope.item.user.watched)
-					$rootScope.$broadcast('SeriesEvent', {'item': scope.item, 'action': 'watch_episode', series: scope.series});
+					$rootScope.$broadcast('EpisodeEvent', {'item': scope.item, 'action': 'watch', series: scope.series});
 				else
-					$rootScope.$broadcast('SeriesEvent', {'item': scope.item, 'action': 'unwatch_episode', series: scope.series});
+					$rootScope.$broadcast('EpisodeEvent', {'item': scope.item, 'action': 'unwatch', series: scope.series});
 			}
 		}
 	};

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.factory('Series', function ($rootScope, $resource, $window) {
+.factory('Series', function ($rootScope, $resource, $window, Episode) {
     var name = 'Series';
     var remoteUrl = '/api/v1/tvshow/:tvdb_id';
     var memData = {};
@@ -16,9 +16,7 @@ angular.module('tvshowmarkApp')
         get: {method: 'GET', params: {tvdb_id: '@tvdb_id'}},
         get_similar: {method: 'GET', params: {tvdb_id: '@id/similar'}},
         plan: {method: 'POST', params: {action: 'plan', tvdb_id: '@id'}},
-        drop: {method: 'POST', params: {action: 'drop', tvdb_id: '@id'}},
-        watch: {method: 'POST', params: {action: 'watch', tvdb_id: '@id'}},
-        unwatch: {method: 'POST', params: {action: 'unwatch', tvdb_id: '@id'}}
+        drop: {method: 'POST', params: {action: 'drop', tvdb_id: '@id'}}
     });
 
 
@@ -99,15 +97,14 @@ angular.module('tvshowmarkApp')
     }
 
     $rootScope.$on('SeriesEvent', function(ev, data) {
-        console.log('SeriesEvent', data.item.user.watched);
+        console.log('SeriesEvent', data);
         switch(data.action) {
-            case 'watch_episode':
-                watch_episode(data.item, data.series);
-            break;
-            case 'unwatch_episode':
-                unwatch_episode(data.item, data.series);
+            case 'watch':
+            case 'unwatch':
+                toLS(data.item)     
             break;
         }
+
     });
 
     return {
