@@ -60,7 +60,7 @@ angular.module('tvshowmarkApp')
         function(res) {
             console.log('<-- fromHTTP SUCCESS', id);
             toMEM(id, res);
-            toLS(id, res);
+            toLS(res);
         }, 
         function(e) {
             console.log('<-- fromHTTP FAIL', id);
@@ -74,13 +74,15 @@ angular.module('tvshowmarkApp')
         if (saveRemote) toHTTP(id, data);
         return data;
     }
+
+    // TO BE IMPLEMENTED
     var toHTTP = function(item, action, series) {
         console.log(item, series);
         //toLS(item); // todo:dev
         return please[action]({id: item.tvdb_id}, 
         function() {
             console.log('--> toHTTP --> SUCCESS');
-            toLS(id, data);
+            toLS(data);
         },
         function(e) {
             console.log('--> toHTTP --> FAIL',e);
@@ -88,7 +90,7 @@ angular.module('tvshowmarkApp')
         });
     }
     var toLS = function(data) {
-        console.log('--> toLS');
+        console.log('--> toLS', data);
         $window.localStorage.setItem(data.tvdb_id, JSON.stringify(data));
         return data;
     }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.controller('ZoomCtrl', function ($rootScope, $scope, $routeParams, Series) {
+.controller('ZoomCtrl', function ($rootScope, $scope, $routeParams, Series, Season) {
 	$scope.offlineCapable = true
 	var id = $routeParams.tvdb_id;
 	//$scope.listName = 'Dashboard';

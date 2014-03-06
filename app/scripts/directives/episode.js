@@ -10,6 +10,7 @@ angular.module('tvshowmarkApp')
 			item: '='
 		},
 		link: function postLink(scope, element, attrs) {
+
 			scope.swatch = function() {
 				if (!scope.item.user.watched)
 					$rootScope.$broadcast('EpisodeEvent', {'item': scope.item, 'action': 'watch', series: scope.series});

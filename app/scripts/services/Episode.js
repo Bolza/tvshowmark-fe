@@ -7,8 +7,8 @@ angular.module('tvshowmarkApp')
     var memData = {};
 
     var please = $resource(remoteUrl, {}, {
-        watch: {method: 'POST', params: {action: 'watch', tvdb_id: '@id'}},
-        unwatch: {method: 'POST', params: {action: 'unwatch', tvdb_id: '@id'}}
+        watch: {method: 'POST', params: {action: 'watch'}},
+        unwatch: {method: 'POST', params: {action: 'unwatch'}}
     });
 
     var watch_episode = function(item, series) {
@@ -21,7 +21,7 @@ angular.module('tvshowmarkApp')
     }
 
     var toHTTP = function(item, action, series) {
-        return please[action]({id: item.tvdb_id}, 
+        return please[action]({tvdb_id: item.tvdb_id}, 
         function() {
             console.log('Episode --> toHTTP --> SUCCESS');
             $rootScope.$broadcast('SeriesEvent', {'item': series, 'action': action});
@@ -33,6 +33,11 @@ angular.module('tvshowmarkApp')
         });
     }
 
+    /** 
+        data {
+            item: the episode
+        }
+    */
     $rootScope.$on('EpisodeEvent', function(ev, data) {
         console.log('EpisodeEvent', data);
         switch(data.action) {
