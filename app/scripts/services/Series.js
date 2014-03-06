@@ -45,7 +45,6 @@ angular.module('tvshowmarkApp')
         toHTTP(item, 'unwatch', series);
     }
 
-
     var fromMEM = function(id) {
         console.log('<-- fromMEM');
         return memData[id];
@@ -88,8 +87,6 @@ angular.module('tvshowmarkApp')
             toActionList(e);
         });
     }
-
-    // TODO: toLS entire series
     var toLS = function(data) {
         console.log('--> toLS');
         $window.localStorage.setItem(data.tvdb_id, JSON.stringify(data));
