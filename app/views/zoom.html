@@ -9,9 +9,9 @@
   		<button ng-show="item" ng-click="watch()">watched</button>
   	</seriesactions>
   	<ul>
-		<season ng-repeat="sea in item.seasons track by $index" item="sea" series="item">
-				<div>Season {{sea.season}}</div>
-				<episode ng-repeat="ep in sea.episodes track by $index" item="ep" series="item"></episode>
-		</season>
+		<season ng-repeat="sea in item.seasons track by $index" item="sea">
+            <div>Season {{sea.season}} <button ng-click="swatch()">O</button></div>
+            <episode  ng-repeat="ep in sea.episodes track by $index" item="ep"></episode>
+        </season>
 	</ul>
 </div>
