@@ -1,10 +1,15 @@
-<div id="left"  ng-include="'views/tops.html'"></div>
+<ion-side-menus>
+	<ion-pane  ion-side-menu-content>
+		<!--div ng-include="'views/home.html'"></div-->
+		<ion-nav-view name="centralView"></ion-nav-view>
+	</ion-pane>
+	
+	<ion-side-menu side="left">
+		<div ng-include="'views/tops.html'"></div>
+	</ion-side-menu>
 
+	<ion-side-menu side="right">
+		<div ng-include="'views/dashboard.html'"></div>
+	</ion-side-menu>
 
-<div id="center" class="page">
-	<h3>main</h3>
-	<ul>
-		<series ng-repeat="item in list.results | filter:dashType track by item.tvdb_id" thisseries="item"></series>
-	</ul>
-</div>
-
+</ion-side-menus>

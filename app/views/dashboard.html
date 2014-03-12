@@ -1,0 +1,10 @@
+<div ng-controller="DashboardCtrl">
+	<header class="bar bar-header">
+		<h3>Dashboard: {{dashType}}</h3>
+	</header>
+	<ion-content has-header="true">
+		<ul>
+			<series ng-repeat="item in list.results | filter:dashType track by item.tvdb_id"></series>
+		</ul>
+	</ion-content>
+</div>

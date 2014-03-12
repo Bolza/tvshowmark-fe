@@ -1,0 +1,21 @@
+<style type="text/css">
+	p {
+		color: #000;
+	}
+	* {
+		background: green;
+	}
+</style>
+
+<div>
+	<header class="bar bar-header">
+		<button ng-click="sideMenuController.toggleLeft()"></button>
+	</header>
+
+	<ion-content has-header="true">
+		<h3>{{title}}</h3>
+		<ul>
+			<series ng-repeat="item in list.results track by item.tvdb_id"></series>
+		</ul>
+	</ion-content>
+</div>

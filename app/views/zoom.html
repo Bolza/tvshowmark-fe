@@ -1,14 +1,15 @@
-<div id="left"  ng-include="'views/tops.html'"></div>
 
 <div id="zoom" class="page" ng-controller="ZoomCtrl">
-  	<h3>zoom</h3>
-  	<div>{{item.tvdb_id}}</div>
-  	<div>{{item.title}}</div>
-  	<div>{{item.user.status}}</div>
-  	<seriesactions>
-  		<button ng-show="item" ng-click="watch()">watched</button>
-  	</seriesactions>
-  	<ul>
+ <h3>zoom</h3>
+ <div>{{item.tvdb_id}}</div>
+ <div>{{item.title}}</div>
+ <div>{{item.user.status}}</div>
+ <seriesactions>
+    <button ng-show="item" ng-click="watch()">watched</button>
+</seriesactions>
+<ul>
+    <accordion close-others="true">
         <season ng-repeat="sea in item.seasons track by $index" item="sea" series="item"> </season>
-	</ul>
+    </accordion>
+</ul>
 </div>

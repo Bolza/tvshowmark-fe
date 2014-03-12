@@ -1,2 +1,9 @@
-<div>Season {{item.season}} <button ng-click="swatch()">O</button></div>
-<episode ng-repeat="ep in item.episodes track by $index" item="ep" series="series"></episode>
+
+<accordion-group is-open="true"> 
+	<accordion-heading> 
+		Season {{item.season}}
+		<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+	</accordion-heading>
+		<div><button ng-click="swatch()">O</button></div>
+	<episode ng-repeat="ep in item.episodes track by $index" item="ep" series="series"></episode>
+</accordion-group>
