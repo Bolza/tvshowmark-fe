@@ -18,27 +18,27 @@ angular.module('tvshowmarkApp')
     }
 
     var actions = {
-        watch: function(item) {
-            item.user.watched = new Date().getTime(); //toMem
-            toHTTP(item, 'watch');
+        watch: function(data) {
+            data.item.user.watched = new Date().getTime(); //toMem
+            toHTTP(data, 'watch');
         },
-        unwatch: function(item) {
-            item.user.watched = undefined;
-            toHTTP(item, 'unwatch');
+        unwatch: function(data) {
+            data.item.user.watched = undefined;
+            toHTTP(data, 'unwatch');
         }
     }
 
-    var toHTTP = function(item, action) {
-        return please[action]({tvdb_id: item.tvdb_id}, 
+    var toHTTP = function(data, action) {
+        return please[action]({tvdb_id: data.item.tvdb_id}, 
         function() {
             console.log('Episode --> toHTTP --> SUCCESS');
-            //$rootScope.$broadcast('SeriesEvent', {'item': series, 'action': action});
+            $rootScope.$broadcast('SeriesEvent', {'item': data.series, 'action': action});
             //$rootScope.$broadcast('SeriesChangeEvent', {'item': item });
         },
         function(e) {
             console.log('Episode --> toHTTP --> FAIL',e);
-            //$rootScope.$broadcast('SeriesEvent', {'item': series, 'action': action});
-            //$rootScope.$broadcast('SeriesChangeEvent', {'item': item });
+            $rootScope.$broadcast('SeriesEvent', {'item': data.series, 'action': action}); //todo:dev
+            //$rootScope.$broadcast('SeriesChangeEvent', {'item': item }); 
             //toActionList(e);
 
         });
@@ -53,10 +53,10 @@ angular.module('tvshowmarkApp')
         console.log('EpisodeEvent', data);
         switch(data.action) {
             case 'watch':
-                actions.watch(data.item);
+                actions.watch(data);
             break;
             case 'unwatch':
-                actions.unwatch(data.item);
+                actions.unwatch(data);
             break;
         }
     });

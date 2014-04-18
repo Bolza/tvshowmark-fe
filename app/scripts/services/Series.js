@@ -116,7 +116,7 @@ angular.module('tvshowmarkApp')
             break;
             case 'watch':
             case 'unwatch':
-
+                toLS(item)
             break;
         }
         //toLS(evdata.item);
