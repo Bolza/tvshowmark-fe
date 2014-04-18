@@ -1,5 +1,5 @@
-<ion-item class="episode item-icon-left item-button-right" ng-class="{true: 'watched', false: 'unwatched'}[item.user.watched !== undefined]">
+<ion-item class="item-accordion episode item-icon-left item-button-right" ng-class="{true: 'watched', false: 'unwatched'}[item.user.watched !== undefined]">
 	<span class="left-badge badge">{{item.episode}}</span>
 	<h2>{{item.title}}</h2> 
-	<button class="button " ng-click="swatch()">O</button>
+	<button class="button" ng-click="swatch()"></button>
 </ion-item>

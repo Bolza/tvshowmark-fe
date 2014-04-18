@@ -26,10 +26,10 @@
 .item h2 {
 	white-space: normal;
 }
+
 /*
 Ionic resize height of items
 */
-
 .item-thumbnail-left, .item-thumbnail-left .item-content {
 	padding-left: 85px;
 	min-height: 85px;

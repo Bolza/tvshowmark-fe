@@ -6,8 +6,16 @@ angular.module('tvshowmarkApp')
 		restrict: 'E',
 		templateUrl: 'views/item-season.html',
 		scope: {
-			item: '=',
-			series: '='
+			item: '=', 
+			series: '=',
+			startExpanded: '='
+		},
+		controller: function($scope) {
+			$scope.expanded = $scope.startExpanded || false;
+			console.log($scope.expanded, $scope.item, $scope.series);
+			$scope.toggleSeason = function() {
+				$scope.expanded = !$scope.expanded;
+			}
 		},
 		link: function postLink(scope, element, attrs) {
 			//console.log('postLink',scope.item);
