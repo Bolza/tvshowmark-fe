@@ -41,14 +41,6 @@ angular.module('tvshowmarkApp')
     */
     var actions = {
         //TODO watch_episode shouldnot be here
-        watch_episode: function(item) {
-            item.user.watched = new Date().getTime(); //toMem
-            toHTTP(item, 'watch');
-        },
-        unwatch_episode: function(item) {
-            item.user.watched = undefined;
-            toHTTP(item, 'unwatch');
-        },
         plan: function(item) {
             item.user.status = 'plan';
             toMEM(item, true, 'plan');

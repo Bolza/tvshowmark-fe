@@ -10,12 +10,19 @@ angular.module('tvshowmarkApp')
 			item: '='
 		},
 		link: function postLink(scope, element, attrs) {
-
+			scope.$watch('item.user.watched', function() {
+				scope.item.user.watched ? element.addClass('episode-watched') : element.removeClass('episode-watched');
+			});
 			scope.swatch = function() {
-				if (!scope.item.user.watched)
+				if (!scope.item.user.watched) {
+					//scope.item.user.watched = true;
 					$rootScope.$broadcast('EpisodeEvent', {'item': scope.item, 'action': 'watch', series: scope.series});
-				else
+				}
+				else {
+					//scope.item.user.watched = undefined;
 					$rootScope.$broadcast('EpisodeEvent', {'item': scope.item, 'action': 'unwatch', series: scope.series});
+				}
+
 			}
 		}
 	};

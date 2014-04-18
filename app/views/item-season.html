@@ -1,8 +1,8 @@
-<div class="season-wrapper" ng-class="{true:'expanded', false:''}[expanded]">
-	<ion-item class="item-stable" ng-click="toggleSeason()">
+<accordion-group class="season">
+	<accordion-heading>
 		<span>Season {{item.season}}</span>
 		<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
-	</ion-item>
+	</accordion-heading>
 		<!--div><button ng-click="swatch()">O</button></div-->
 	<episode ng-repeat="ep in item.episodes track by $index" item="ep" series="series"></episode>
-</div>
+</accordion-group>

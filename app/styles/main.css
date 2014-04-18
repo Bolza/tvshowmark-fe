@@ -5,6 +5,10 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
+.ionicons {
+	font-family: 'Ionicons';
+}
+
 .has-tabs {
   margin-top: 49px;
   bottom: 0;
