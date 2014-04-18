@@ -13,7 +13,7 @@ angular.module('tvshowmarkApp')
 				$rootScope.$broadcast('SeriesEvent', {'item': scope.item, 'action': 'plan', 'list': scope.listName});
 			}
 			scope.drop = function() {
-				$rootScope.$broadcast('SeriesEvent', {'item': scope.item, 'action': 'clear', 'list': scope.listName});
+				$rootScope.$broadcast('SeriesEvent', {'item': scope.item, 'action': 'drop', 'list': scope.listName});
 			}
 		}
 	};

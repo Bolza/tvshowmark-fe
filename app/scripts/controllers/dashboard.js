@@ -1,13 +1,22 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.controller('DashboardCtrl', function ($scope, Dashboard, Series) {
+.controller('DashboardCtrl', function ($scope, Dashboard,$window) {
 
-	$scope.offlineCapable = false;
+	$scope.offlineCapable = true;
 	$scope.listName = 'Dashboard';
-	$scope.dashType = 'plan' || 'watching' || 'history';
+	$scope.dashType = 'watching';
 	$scope.list = Dashboard.get();
-	console.log($scope.list);
-
+	console.log('Dashboard.list',$scope.list);
+	
+	$scope.onTabSelected = function(type) {
+		$scope.dashType = type;
+		$window.document.body.classList.add(type);
+	}
+	$scope.doRefresh = function() {
+		console.log('doRefresh',arguments);
+		$scope.$broadcast('scroll.refreshComplete');
+	}
+	$scope.onTabSelected('Watching');
 });
 	

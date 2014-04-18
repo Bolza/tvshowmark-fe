@@ -1,15 +1,22 @@
+<div id="zoom" class="page zoom" ng-controller="ZoomCtrl">
+	<header class="bar bar-header">
+        <ion-nav-buttons side="left">
+        	<button menu-toggle="left" ng-click="sideMenuController.toggleLeft()" class="button button-icon icon ion-navicon"></button>
+    	</ion-nav-buttons>
 
-<div id="zoom" class="page" ng-controller="ZoomCtrl">
- <h3>zoom</h3>
- <div>{{item.tvdb_id}}</div>
- <div>{{item.title}}</div>
- <div>{{item.user.status}}</div>
- <seriesactions>
-    <button ng-show="item" ng-click="watch()">watched</button>
-</seriesactions>
-<ul>
-    <accordion close-others="true">
-        <season ng-repeat="sea in item.seasons track by $index" item="sea" series="item"> </season>
-    </accordion>
-</ul>
+
+    </header>
+	<ion-content has-header="true">	
+		<h3>{{item.title}}</h3>
+		<div>{{item.tvdb_id}}</div>
+		<div>{{item.user.status}}</div>
+		<seriesactions>
+			<button ng-show="item" ng-click="watch()">WATCH SERIES</button>
+		</seriesactions>
+		<ul>
+			<accordion close-others="oneAtATime">
+				<season ng-repeat="sea in item.seasons track by $index" item="sea" series="item"> </season>
+			</accordion>
+		</ul>
+	</ion-content>
 </div>

@@ -22,20 +22,38 @@
     <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
     <!-- endbower -->
     <!-- endbuild -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/series-list.css">
+    <link rel="stylesheet" href="styles/zoom-list.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="tvshowmarkApp">
+  <body ng-app="tvshowmarkApp" ng-controller="MainCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view="">
-         <ion-nav-view></ion-nav-view>
-    </div>
+    <ion-nav-view>
+        <ion-side-menus>
+            <ion-pane  ion-side-menu-content>
+                <!--div ng-include="'views/home.html'"></div-->
+                <ion-nav-view name="centralView"></ion-nav-view>
+            </ion-pane>
+            
+            <ion-side-menu side="left" width="sideWith">
+                <ion-nav-view name="leftView"></ion-nav-view>
+            </ion-side-menu>
+
+            <ion-side-menu side="right" width="sideWith">
+                <div ng-include="'views/dashboard.html'"></div>
+            </ion-side-menu>
+
+        </ion-side-menus>
+    </ion-nav-view>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <!--script>
@@ -63,6 +81,7 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/ionic/release/js/ionic.js"></script>
     <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -76,6 +95,7 @@
         <script src="scripts/services/Series.js"></script>
         <script src="scripts/services/Episode.js"></script>
         <script src="scripts/services/Season.js"></script>
+        <script src="scripts/services/Tops.js"></script>
         <script src="scripts/directives/series.js"></script>
         <script src="scripts/directives/seriesactions.js"></script>
         <script src="scripts/directives/season.js"></script>

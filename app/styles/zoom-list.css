@@ -1,0 +1,10 @@
+.left-badge {
+	position: absolute;
+	left: 5px;
+}
+.item-complex.item-icon-left .item-content {
+	padding-left: 35px;
+}
+.panel-body {
+	padding: 2px;
+}

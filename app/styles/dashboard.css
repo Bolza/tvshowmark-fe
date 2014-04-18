@@ -1,0 +1,58 @@
+.dash-tabs {
+	width: 100%;
+	height: 49px;
+	position: relative;
+	background: #7d7d7d;
+	margin-bottom: 0;
+	top: 44px;
+}
+.dash-tab {
+	float: left;
+	border-top: 7px solid;
+	text-align: center;
+	padding-top: 10px;
+	height: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	width: 33.33%;
+	color: #fff;
+	text-transform: uppercase;
+}
+
+.dash-tabs .dash-tab a:hover,
+.dash-tabs .dash-tab a:active {
+	background: transparent;
+	border: none;
+}
+.dash-tabs .dash-tab#watching { background:#3fd397; border-color: #26B179; }
+.dash-tabs .dash-tab#planned  { background:#29c8c4; border-color: #04AFAB; }
+.dash-tabs .dash-tab#history  { background:#f9bc23; border-color: #DDA61C; }
+
+.dash-tabs .dash-tab:before { 
+	display: none;
+	content: "\f10d";
+	z-index: 1;
+	position: absolute;
+	bottom: -5px;
+	font-family: "Ionicons";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	text-rendering: auto;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.watching .dash-tabs .dash-tab#watching:before {display: block;}
+.planned  .dash-tabs .dash-tab#planned:before   {display: block;}
+.archived .dash-tabs .dash-tab#history:before   {display: block;}
+
+
+/*
+.item-complex .item-content {
+	padding: 5px 10px 0px 5px;
+} 
+*/
+

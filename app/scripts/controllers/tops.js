@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.controller('TopsCtrl', function ($rootScope, $scope, Dashboard, Series) {
+.controller('TopsCtrl', function ($scope, Tops) {
 
-	$scope.list = Dashboard.get();
+	$scope.list = Tops.get();
 
 });

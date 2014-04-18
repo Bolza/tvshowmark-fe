@@ -19,7 +19,6 @@ angular.module('tvshowmarkApp')
         drop: {method: 'POST', params: {action: 'drop', tvdb_id: '@id'}}
     });
 
-
     var actionList = [];
     var toActionList = function(e) {
         actionList.push(e);
@@ -32,35 +31,49 @@ angular.module('tvshowmarkApp')
         if (!memData[id]) memData[id] = fromHTTP(id);
         return memData[id];
     }
-    var set = function (id, data) {
-        toMEM(id, data, true);
+
+    var set = function (item) {
+        toMEM(item, true);
     }
 
-    var watch_episode = function(item, series) {
-        item.user.watched = new Date().getTime(); //toMem
-        toHTTP(item, 'watch', series);
-    }
-    var unwatch_episode = function(item, series) {
-        item.user.watched = undefined;
-        toHTTP(item, 'unwatch', series);
+    /*
+        actions.{action} ( item )
+    */
+    var actions = {
+        //TODO watch_episode shouldnot be here
+        watch_episode: function(item) {
+            item.user.watched = new Date().getTime(); //toMem
+            toHTTP(item, 'watch');
+        },
+        unwatch_episode: function(item) {
+            item.user.watched = undefined;
+            toHTTP(item, 'unwatch');
+        },
+        plan: function(item) {
+            item.user.status = 'plan';
+            toMEM(item, true, 'plan');
+        },
+        drop: function(item) {
+            item.user.status = 'drop';
+            toMEM(item, true, 'drop');
+        }
     }
 
     var fromMEM = function(id) {
-        console.log('<-- fromMEM');
+        console.log('Series <-- fromMEM');
         return memData[id];
     }
     var fromLS = function(id) {
-        console.log('<-- fromLS', id);
+        console.log('Series <-- fromLS', id);
         var data = $window.localStorage.getItem(id);
         data = JSON.parse(data);
         return data;
     }
     var fromHTTP = function(id) {
-        return please.get({tvdb_id: id}, 
+        return please.get({'tvdb_id': id}, 
         function(res) {
             console.log('<-- fromHTTP SUCCESS', id);
-            toMEM(id, res);
-            toLS(res);
+            toMEM(res);
         }, 
         function(e) {
             console.log('<-- fromHTTP FAIL', id);
@@ -68,42 +81,53 @@ angular.module('tvshowmarkApp')
         });
     }
 
-    var toMEM = function(id, data, saveRemote) {
-        console.log('--> toMEM', id, saveRemote == true)
-        memData[id] = data;
-        if (saveRemote) toHTTP(id, data);
-        return data;
+    var toMEM = function(item, saveRemote, action) {
+        console.log('Series --> toMEM', item.tvdb_id, action, saveRemote == true)
+        memData[item.tvdb_id] = item;
+        if (saveRemote) toHTTP(item, action);
+        else            toLS(item);
+        return item;
     }
 
     // TO BE IMPLEMENTED
-    var toHTTP = function(item, action, series) {
-        console.log(item, series);
-        //toLS(item); // todo:dev
-        return please[action]({id: item.tvdb_id}, 
+    var toHTTP = function(item, action) {
+        console.log('Series --> toHTTP',item.tvdb_id);
+        toLS(item); // todo:dev
+        return;
+
+        return please[action]({'id': item.tvdb_id}, 
         function() {
-            console.log('--> toHTTP --> SUCCESS');
-            toLS(data);
+            console.log('Series --> toHTTP --> SUCCESS');
+            toLS(item);
         },
         function(e) {
-            console.log('--> toHTTP --> FAIL',e);
+            console.log('Series --> toHTTP --> FAIL',e);
             toActionList(e);
         });
     }
-    var toLS = function(data) {
-        console.log('--> toLS', data);
-        $window.localStorage.setItem(data.tvdb_id, JSON.stringify(data));
-        return data;
+    var toLS = function(item) {
+        console.log('Series --> toLS', item.tvdb_id);
+        $window.localStorage.setItem(item.tvdb_id, JSON.stringify(item));
+        //and in dashboard and tops list?
+        $rootScope.$broadcast('SeriesChangeEvent', {'item': item });
+        return item;
     }
 
-    $rootScope.$on('SeriesEvent', function(ev, data) {
-        console.log('SeriesEvent', data);
-        switch(data.action) {
+    $rootScope.$on('SeriesEvent', function(ev, evdata) {
+        console.log('SeriesEvent', evdata);
+        switch(evdata.action) {
+            case 'plan':
+                actions.plan(evdata.item);
+            break;
+            case 'drop':
+                actions.drop(evdata.item);
+            break;
             case 'watch':
             case 'unwatch':
-                toLS(data.item)     
+
             break;
         }
-
+        //toLS(evdata.item);
     });
 
     return {

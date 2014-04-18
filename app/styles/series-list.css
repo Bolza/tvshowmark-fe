@@ -1,0 +1,46 @@
+.series-badge:before {
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 2px 9px;
+	font-size: 11.844px;
+	font-weight: bold;
+	line-height: 14px;
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #999;
+	margin-top: 24px;
+	border-radius: 9px 0px 0px 9px;
+	-moz-border-radius: 9px 0px 0px 9px;
+	-webkit-border-radius: 9px 0px 0px 9px;
+}
+.watching .series-badge:before {
+	display: inline-block;
+	background-color: #3FD397;
+	content: 'Watching';
+}
+
+.item h2 {
+	white-space: normal;
+}
+/*
+Ionic resize height of items
+*/
+
+.item-thumbnail-left, .item-thumbnail-left .item-content {
+	padding-left: 85px;
+	min-height: 85px;
+}
+
+.item-thumbnail-left > img:first-child {
+	max-width: 70px;
+	max-height: 70px;
+	top: 5px;
+	left: 5px;
+}
+.item-button-right {
+	padding-right: 0;
+}

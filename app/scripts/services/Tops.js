@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.factory('Dashboard', function Dashboard($resource, $rootScope, $window) {
+.factory('Tops', function Tops($resource, $rootScope, $window) {
     var memData;
-    var remoteUrl = '/api/v1/user/:action/';
-    var name = 'Dashboard';
+    var remoteUrl = '/api/v1/tvshow/top/';
+    var name = 'Tops';
     var please = $resource(remoteUrl, {}, {
-        get: {method: 'GET', params: {action: 'dashboard'}}
+        get: {method: 'GET'}
     });
 
     var actionList = [];
@@ -23,6 +23,7 @@ angular.module('tvshowmarkApp')
     var set = function (data) {
         toMEM(data, true);
     }
+
     /*
         Only saves the current image of the list inside LocalStorage
         Cant save the list upstream on the server, 
@@ -33,18 +34,18 @@ angular.module('tvshowmarkApp')
     }
 
     var fromMEM = function() {
-        console.log('Dashboard <-- fromMEM');
+        console.log('Tops <-- fromMEM');
         return memData;
     }
     var fromHTTP = function() {
-        console.log('Dashboard <-- fromHTTP');
+        console.log('Tops <-- fromHTTP');
         return please.get(function(res) {
             toMEM(res);
             toLS(res)
         }, toActionList);
     }
     var fromLS = function() {
-        console.log('Dashboard <-- fromLS');
+        console.log('Tops <-- fromLS');
         var data = $window.localStorage.getItem(name);
         data = JSON.parse(data);
         toMEM(data);
@@ -52,13 +53,13 @@ angular.module('tvshowmarkApp')
     }
 
     var toMEM = function(data) {
-        console.log('Dashboard --> toMEM')
+        console.log('Tops --> toMEM')
         memData = data;
         toLS(data);
         return data;
     }
     var toLS = function(data) {
-        console.log('Dashboard --> toLS');
+        console.log('Tops --> toLS');
         $window.localStorage.setItem(name, JSON.stringify(data));
         return data;
     }

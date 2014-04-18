@@ -1,11 +1,23 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
 html {
   height: 100%;
+  font-family: 'Open Sans', sans-serif;
 }
+
+.has-tabs {
+  margin-top: 49px;
+  bottom: 0;
+}
+
+
+/*
 a {color: inherit;}
 a:hover {color: inherit;}
 
 ul {padding: 5px;}
-plan, drop {float:right; padding: 2px; display: block; border: 1px solid black;}
+plan, drop {float:right; padding: 2px; display: block; border: 1px solid black; cursor: pointer;}
+plan:hover, drop:hover {background: green}
 .series, episode {
   display: block; 
   position: relative; 
@@ -29,3 +41,4 @@ label {
 #tops {background: green; }
 #center {background: purple; }
 #zoom {background: green;}
+*/

@@ -2,22 +2,23 @@
 
 angular.module('tvshowmarkApp', [
     'ngResource',
-    , 'ionic'
+    'ionic',
+    'ui.bootstrap'
     ])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-    .state('main', {
+    .state('home', {
         url: "/home",
-        templateUrl: "views/main.html",
-        controller: 'MainCtrl',
-        abstract:true
-    })
-    .state('main.home', {
-        url: "/homes",
         views: {
             'centralView': {
                 controller: 'HomeCtrl',
                 templateUrl: "views/home.html"
+            },
+            'leftView': {
+                templateUrl: "views/tops.html"
+            },
+            'rightView': {
+                templateUrl: "views/dashboard.html"
             }
         }
     })
@@ -26,6 +27,12 @@ angular.module('tvshowmarkApp', [
         views: {
             'centralView' :{
                 templateUrl: "views/zoom.html"
+            },
+            'leftView': {
+                templateUrl: "views/tops.html"
+            },
+            'rightView': {
+                templateUrl: "views/dashboard.html"
             }
         }
     })

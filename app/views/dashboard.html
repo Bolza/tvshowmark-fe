@@ -1,10 +1,24 @@
-<div ng-controller="DashboardCtrl">
+
+<div id="dashboard" class="page dashboard" ng-controller="DashboardCtrl">
 	<header class="bar bar-header">
-		<h3>Dashboard: {{dashType}}</h3>
-	</header>
-	<ion-content has-header="true">
-		<ul>
-			<series ng-repeat="item in list.results | filter:dashType track by item.tvdb_id"></series>
-		</ul>
-	</ion-content>
+        <ion-nav-buttons side="left">
+        	<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    	</ion-nav-buttons>
+    </header>
+
+
+	
+	<ion-view>
+		<div class="dash-tabs">
+			<div class="dash-tab" id="watching" ng-click="onTabSelected('Watching')"><span>Watching</span></div>
+			<div class="dash-tab" id="planned"  ng-click="onTabSelected('plan')"><span>Planned</span></div>
+			<div class="dash-tab" id="history"  ng-click="onTabSelected('history')"><span>History</span></div>
+		</div>
+		<ion-content has-header="true" has-tabs="true">	
+			<!--ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"> </ion-refresher>-->
+			<ion-list>
+				<series ng-repeat="item in list.results | filter:dashType track by item.tvdb_id"></series>
+			</ion-list>
+		</ion-content>
+	</ion-view>	
 </div>

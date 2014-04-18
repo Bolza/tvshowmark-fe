@@ -1,5 +1,5 @@
-<div class="series">
-	<a href="#/zoom/{{item.tvdb_id}}">{{item.title}} {{(item.user.status)}}</a>
-	<drop  ng-click="drop()">drop</drop>
-	<plan  ng-click="plan()">plan</plan>
-</div>
+<a class="item item-thumbnail-left {{item.user.status}}" ui-sref="zoom({tvdb_id: item.tvdb_id})">	
+  	<img class="series-thumb" src="{{item.thumb}}">
+	<h2>{{item.title}}</h2>
+	<div class="series-badge"></div>
+</a>
