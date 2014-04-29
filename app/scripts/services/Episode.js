@@ -17,51 +17,44 @@ angular.module('tvshowmarkApp')
         console.log('actionList',actionList)
     }
 
+    var getSeason = function(data) {
+       for (var i = 0, sea; sea = data.series.seasons[i]; i++) {
+            if (sea.season == data.episode.season) {
+                if (sea.user.watched_episodes > sea.episodes.length) sea.user.watched_episodes = sea.episodes.length;
+                else if (sea.user.watched_episodes < 0) sea.user.watched_episodes = 0;
+                return sea;
+            }
+        }
+    }
+
     var actions = {
         watch: function(data) {
-            data.item.user.watched = new Date().getTime(); //toMem
-            toHTTP(data, 'watch');
+            data.episode.user.watched = new Date().getTime(); //toMem
+            getSeason(data).user.watched_episodes++;
+            if (!data.noRemote) toHTTP(data, 'watch');
         },
         unwatch: function(data) {
-            data.item.user.watched = undefined;
-            toHTTP(data, 'unwatch');
+            data.episode.user.watched = undefined;
+            getSeason(data).user.watched_episodes--;
+            if (!data.noRemote) toHTTP(data, 'unwatch');
         }
     }
 
     var toHTTP = function(data, action) {
-        return please[action]({tvdb_id: data.item.tvdb_id}, 
+        return please[action]({tvdb_id: [data.episode.tvdb_id]}, 
         function() {
-            console.log('Episode --> toHTTP --> SUCCESS');
-            $rootScope.$broadcast('SeriesEvent', {'item': data.series, 'action': action});
-            //$rootScope.$broadcast('SeriesChangeEvent', {'item': item });
+            //console.log('Episode --> toHTTP --> SUCCESS');
+            $rootScope.$broadcast('EpisodeEvent', {'series': data.series, 'episode': data.episode, 'action': action});
         },
         function(e) {
-            console.log('Episode --> toHTTP --> FAIL',e);
-            $rootScope.$broadcast('SeriesEvent', {'item': data.series, 'action': action}); //todo:dev
-            //$rootScope.$broadcast('SeriesChangeEvent', {'item': item }); 
-            //toActionList(e);
-
+            //console.log('Episode --> toHTTP --> FAIL',data);
+            $rootScope.$broadcast('EpisodeEvent', {'series': data.series, 'episode': data.episode, 'action': action}); //todo:dev
         });
     }
-
-    /** 
-        data {
-            item: the episode
-        }
-    */
-    $rootScope.$on('EpisodeEvent', function(ev, data) {
-        console.log('EpisodeEvent', data);
-        switch(data.action) {
-            case 'watch':
-                actions.watch(data);
-            break;
-            case 'unwatch':
-                actions.unwatch(data);
-            break;
-        }
-    });
-
+    
+    // data { episode, series }
     return {
-
+        watch: actions.watch,
+        unwatch: actions.unwatch
     }
 });

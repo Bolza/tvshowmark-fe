@@ -6,5 +6,4 @@ angular.module('tvshowmarkApp')
 	var id = $stateParams.tvdb_id;
 	//$scope.listName = 'Dashboard';
 	window.item = $scope.item = Series.get(id);
-
 });

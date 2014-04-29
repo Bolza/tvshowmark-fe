@@ -1,0 +1,110 @@
+/***** LIST  ******/
+.left-badge {
+	position: absolute;
+	left: 5px;
+}
+
+.season .panel-heading .watch-action {
+	position: absolute;
+	right: 5px;
+	margin-top: -6px;
+}
+.watch-action:after {
+	content: '\f16d';
+	font-size: 50px;
+}
+
+episode.completed .watch-action:after {
+	content: '\f16e';
+	color: #3FD397;
+}
+
+season.complete .watch-action:after {
+	content: '\f16e';
+	color: #3FD397;
+}
+
+
+/***** DETAILS  ******/
+#showHeader {
+	height: 184px;
+	position: relative;
+	background-color: #444;
+	margin-top: 44px;
+	background-size: 100%;
+}
+.title-bar {
+	position: absolute;
+	bottom: 0;
+	height: 40px;
+	width: 100%;
+	background-color: #000;
+	font-size: 27px;
+	color: #e5e5e5;
+	opacity:0.7;
+	padding: 3px 0 0 10px;
+	overflow: hidden;
+}
+#zoom .title-bar {
+	display: none;
+}
+.b-action {
+	display: inline-block;
+	font-size: 40px;
+}
+.b-action.drop:before {
+	content: '\f303';
+	color: #fd645f;
+}
+.b-action.plan:before {
+	content: '\f216';
+	color: #29c8c4;
+}
+
+.details .b-action {
+	position: absolute;
+	z-index: 1;
+	top: 8px;
+}
+.details .b-action.drop {
+	left: 10px;
+}
+.details .b-action.plan {
+	left: 60px;
+}
+
+
+/*****	ACCORDION  ******/
+
+.season .accordion-arrow {
+	float: left;
+	font-size: 20px;
+	margin-right: 10px;
+	width: 14px;
+}
+.season.accordion-closed .accordion-arrow:before {
+	content: "\f10a";
+}
+.season.accordion-open .accordion-arrow:before {
+	content: "\f104";
+}
+
+
+/*
+	ionic override
+*/
+.item-complex.item-icon-left .item-content {
+	padding-left: 35px;
+}
+.item.active, 
+.item-complex.active .item-content,
+.item.active.item-stable {
+	background: inherit;
+}
+
+/*
+	bootstrap-ui override
+*/
+.season .panel-heading {
+	height: 51px;
+}

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.directive('episode', function ($rootScope) {
+.directive('episode', function ($rootScope, Episode) {
 	return {
 		restrict: 'E',
 		templateUrl: 'views/item-episode.html',
@@ -10,20 +10,23 @@ angular.module('tvshowmarkApp')
 			item: '='
 		},
 		link: function postLink(scope, element, attrs) {
-			scope.$watch('item.user.watched', function() {
-				scope.item.user.watched ? element.addClass('episode-watched') : element.removeClass('episode-watched');
+			//avviene sia al watch manuale che a quello imposto dai WatchAll (Season e Series)
+			var d1 = scope.$watch('item.user.watched', function() {
+				scope.item.user.watched ? element.addClass('completed') : element.removeClass('completed');
 			});
 			scope.swatch = function() {
 				if (!scope.item.user.watched) {
-					//scope.item.user.watched = true;
-					$rootScope.$broadcast('EpisodeEvent', {'item': scope.item, 'action': 'watch', series: scope.series});
+					Episode.watch({'episode': scope.item, 'series': scope.series});
 				}
 				else {
-					//scope.item.user.watched = undefined;
-					$rootScope.$broadcast('EpisodeEvent', {'item': scope.item, 'action': 'unwatch', series: scope.series});
+					Episode.unwatch({'episode': scope.item, 'series': scope.series});
 				}
-
 			}
+
+			element.on('$destroy', function(e) {
+	        	d1();  
+	     	});
+
 		}
 	};
 });

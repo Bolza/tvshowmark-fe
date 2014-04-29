@@ -1,6 +1,14 @@
 <div class="page home">
 		<h3>My Title: {{title}}</h3>
-		<ul>
-			<series ng-repeat="item in list.results track by item.tvdb_id"></series>
-		</ul>
+		
+		<img class="home-logo" src="images/logo.png"></img>
+		<img class="home-logo" src="images/help-home.png"></img>
+
+		<button class="button login" ng-click="startLogin()">LOGIN</button>
+		<a onclick="location.href='/api/v1/auth/login/facebook/?next=/'">
+			<span class="social-icon ion-social-facebook"></span>
+		</a>
+		<a onclick="location.href='/api/v1/auth/login/google-oauth2/?next=/'">
+			<span class="social-icon ion-social-googleplus"></span>
+		</a>
 </div>

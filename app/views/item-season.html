@@ -1,7 +1,8 @@
 <accordion-group class="season">
 	<accordion-heading>
 		<span>Season {{item.season}}</span>
-		<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+		<i class="accordion-arrow ionicons"></i>
+		<button class="button watch-action ionicons" ng-click="swatch($event)"></button>
 	</accordion-heading>
 		<!--div><button ng-click="swatch()">O</button></div-->
 	<episode ng-repeat="ep in item.episodes track by $index" item="ep" series="series"></episode>

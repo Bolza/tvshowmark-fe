@@ -6,6 +6,7 @@
 	margin-bottom: 0;
 	top: 44px;
 }
+
 .dash-tab {
 	float: left;
 	border-top: 7px solid;
@@ -34,25 +35,16 @@
 	content: "\f10d";
 	z-index: 1;
 	position: absolute;
-	bottom: -5px;
+	bottom: -6px;
 	font-family: "Ionicons";
 	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	text-rendering: auto;
+	margin-left: 7px;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 }
 .watching .dash-tabs .dash-tab#watching:before {display: block;}
-.planned  .dash-tabs .dash-tab#planned:before   {display: block;}
-.archived .dash-tabs .dash-tab#history:before   {display: block;}
+.plan  .dash-tabs .dash-tab#planned:before   {display: block;}
+.history .dash-tabs .dash-tab#history:before   {display: block;}
 
 
-/*
-.item-complex .item-content {
-	padding: 5px 10px 0px 5px;
-} 
-*/
-
+#dashboard .series-badge { display: none; }

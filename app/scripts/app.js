@@ -4,7 +4,7 @@ angular.module('tvshowmarkApp', [
     'ngResource',
     'ionic',
     'ui.bootstrap'
-    ])
+])
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
     .state('home', {

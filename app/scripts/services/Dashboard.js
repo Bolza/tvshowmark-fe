@@ -9,10 +9,16 @@ angular.module('tvshowmarkApp')
         get: {method: 'GET', params: {action: 'dashboard'}}
     });
 
+    var getIndexOf = function(id) {
+        for(var i=0, o; o = memData.results[i]; i++ ) {
+            if (o.tvdb_id == id) return i;
+        }
+    }
+
     var actionList = [];
     var toActionList = function(e) {
         actionList.push(e);
-        console.log('actionList',actionList)
+        //console.log('actionList',actionList)
     }
 
     var get = function() {
@@ -23,28 +29,25 @@ angular.module('tvshowmarkApp')
     var set = function (data) {
         toMEM(data, true);
     }
-    /*
-        Only saves the current image of the list inside LocalStorage
-        Cant save the list upstream on the server, 
-        it's just a shortcut to have the list with all items refreshed
-    */
+
     var save = function() {
-        set(get());
+        //console.log('dash save list ->', get());
+        set(memData);
     }
 
     var fromMEM = function() {
-        console.log('Dashboard <-- fromMEM');
+        //console.log('Dashboard <-- fromMEM');
         return memData;
     }
     var fromHTTP = function() {
-        console.log('Dashboard <-- fromHTTP');
+        //console.log('Dashboard <-- fromHTTP');
         return please.get(function(res) {
             toMEM(res);
             toLS(res)
         }, toActionList);
     }
     var fromLS = function() {
-        console.log('Dashboard <-- fromLS');
+        //console.log('Dashboard <-- fromLS');
         var data = $window.localStorage.getItem(name);
         data = JSON.parse(data);
         toMEM(data);
@@ -52,21 +55,27 @@ angular.module('tvshowmarkApp')
     }
 
     var toMEM = function(data) {
-        console.log('Dashboard --> toMEM')
+        //console.log('Dashboard --> toMEM')
         memData = data;
         toLS(data);
         return data;
     }
     var toLS = function(data) {
-        console.log('Dashboard --> toLS');
+        //console.log('Dashboard --> toLS');
         $window.localStorage.setItem(name, JSON.stringify(data));
         return data;
     }
     
-    $rootScope.$on('SeriesChangeEvent', save);
+    $rootScope.$on('SeriesChangeEvent', function(e,item) {
+        var index = getIndexOf(item.tvdb_id);
+        if (index > -1) memData.results.splice(index, 1);
+        if (item.user.status != undefined) {
+            memData.results.push(item);
+        }
+        save();
+    });
 
     return {
         get: get
     }
 });
-

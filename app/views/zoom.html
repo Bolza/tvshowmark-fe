@@ -7,19 +7,20 @@
     </header>
 
 	<ion-view>
-		<div class="series-details">
-			<div>{{item.title}}</div>
-			<div>{{item.tvdb_id}}</div>
-			<div>{{item.user.status}}</div>
-			<seriesactions>
-				<button ng-show="item" ng-click="watch()">WATCH SERIES</button>
-			</seriesactions>
-			
-		</div>
-		<ion-content has-header="true" class="has-upperbox">	
+		<ion-content class="">	
+			<div class="details">
+				<div id="showHeader" style="background: url('{{item.images.header}}') no-repeat center #444; background-size: 100%">
+					<div class="title-bar"> <h2>{{item.title}}</h2> </div>
+					<seriesactions>
+						<a class="b-action plan ionicons" ng-click="plan()"></a>
+						<a class="b-action drop ionicons" ng-click="drop()"></a>
+					</seriesactions>
+				</div>			
+			</div>
 			<accordion close-others="true">
 				<ion-list>
-					<season ng-repeat="sea in item.seasons track by $index" item="sea" series="item" start-expanded="$index == 0"> </season>
+					<season ng-repeat="sea in item.seasons track by $index" item="sea" series="item" start-expanded="$index == 0" 
+					ng-click="clickHandler()"> </season>
 				</ion-list>
 				<ion-scroll> </ion-scroll>
 			</accordion>

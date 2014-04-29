@@ -12,7 +12,7 @@ angular.module('tvshowmarkApp')
     var actionList = [];
     var toActionList = function(e) {
         actionList.push(e);
-        console.log('actionList',actionList)
+        //console.log('actionList',actionList)
     }
 
     var get = function() {
@@ -34,18 +34,18 @@ angular.module('tvshowmarkApp')
     }
 
     var fromMEM = function() {
-        console.log('Tops <-- fromMEM');
+        //console.log('Tops <-- fromMEM');
         return memData;
     }
     var fromHTTP = function() {
-        console.log('Tops <-- fromHTTP');
+        //console.log('Tops <-- fromHTTP');
         return please.get(function(res) {
             toMEM(res);
             toLS(res)
         }, toActionList);
     }
     var fromLS = function() {
-        console.log('Tops <-- fromLS');
+        //console.log('Tops <-- fromLS');
         var data = $window.localStorage.getItem(name);
         data = JSON.parse(data);
         toMEM(data);
@@ -53,18 +53,18 @@ angular.module('tvshowmarkApp')
     }
 
     var toMEM = function(data) {
-        console.log('Tops --> toMEM')
+        //console.log('Tops --> toMEM')
         memData = data;
         toLS(data);
         return data;
     }
     var toLS = function(data) {
-        console.log('Tops --> toLS');
+        //console.log('Tops --> toLS');
         $window.localStorage.setItem(name, JSON.stringify(data));
         return data;
     }
     
-    $rootScope.$on('SeriesChangeEvent', save);
+    $rootScope.$on('SeriesChangeEvent', save); //test if change in zoom reflects here
 
     return {
         get: get

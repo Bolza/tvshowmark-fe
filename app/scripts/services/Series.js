@@ -35,7 +35,6 @@ angular.module('tvshowmarkApp')
     var set = function (item) {
         toMEM(item, true);
     }
-
     /*
         actions.{action} ( item )
     */
@@ -101,29 +100,16 @@ angular.module('tvshowmarkApp')
         console.log('Series --> toLS', item.tvdb_id);
         $window.localStorage.setItem(item.tvdb_id, JSON.stringify(item));
         //and in dashboard and tops list?
-        $rootScope.$broadcast('SeriesChangeEvent', {'item': item });
+        $rootScope.$broadcast('SeriesChangeEvent', item );
         return item;
     }
 
-    $rootScope.$on('SeriesEvent', function(ev, evdata) {
-        console.log('SeriesEvent', evdata);
-        switch(evdata.action) {
-            case 'plan':
-                actions.plan(evdata.item);
-            break;
-            case 'drop':
-                actions.drop(evdata.item);
-            break;
-            case 'watch':
-            case 'unwatch':
-                toLS(item)
-            break;
-        }
-        //toLS(evdata.item);
-    });
-
     return {
-        get: get, //return [seriesItem] future object
+        get: get,
+        set: set,
+        plan: actions.plan,
+        drop: actions.drop   
+        //return [seriesItem] future object
         //set: function(data) {return memData[id] = data},  //(seriesItem.id, action) return seriesItem please.plan({id:tvdb_id},toMEM, toActionList);
         //remote: please
     }

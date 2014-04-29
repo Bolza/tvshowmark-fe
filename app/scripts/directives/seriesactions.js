@@ -1,15 +1,18 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.directive('seriesactions', function ($rootScope) {
+.directive('seriesactions', function ($rootScope, Series) {
 	return {
 		restrict: 'E',
 		link: function postLink(scope, element, attrs) {
+			scope.plan = function() {
+				Series.plan(scope.item);
+			};
 			scope.drop = function() {
-				$rootScope.$broadcast('DashboardEvent', {'item': scope.item, 'action': 'clear', 'list': scope.listName});
+				Series.drop(scope.item);
 			};
 			scope.watch = function() {
-				$rootScope.$broadcast('DashboardEvent', {'item': scope.item, 'action': 'watch', 'list': scope.listName});
+				
 			}
 			
 		}

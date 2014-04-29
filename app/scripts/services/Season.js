@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tvshowmarkApp')
-.factory('Season', function Season($rootScope, $resource, $window) {
+.factory('Season', function Season($rootScope, $resource, Episode) {
 	var user = { watched_episodes: 0 };
 	var status = null;
 	var remoteUrl = '/api/v1/user/:action';
@@ -18,37 +18,38 @@ angular.module('tvshowmarkApp')
 
         IMPROVEMENT: pass only series_id
 	*/
-    var watch_episodes = function(season, series) {
-        console.log(season, series);
-        for (var i=0, item; item = season.episodes[i]; i++) {
-            item.user.watched = new Date().getTime(); //toMem
+    var watch = function(data) {
+        for (var i=0, item; item = data.season.episodes[i]; i++) {
+            Episode.watch({'episode': item, 'series': data.series, 'noRemote': true});
         }
-        season.user.watched_episodes = season.episodes.length;
-        toHTTP(season.episodes, 'watch', series);
+        
+        $rootScope.$broadcast('SeasonEvent', {'series': data.series, 'action': 'watch'});
+        toHTTP(data, 'watch');
     }
-    var unwatch_episodes = function(season, series) {
-        for (var i=0, item; item = season.episodes[i]; i++) {
-        	item.user.watched = undefined;
+    var unwatch = function(data) {
+        for (var i=0, item; item = data.season.episodes[i]; i++) {
+        	Episode.unwatch({'episode': item, 'series': data.series, 'noRemote': true});
     	}
-        season.user.watched_episodes = 0;
-        toHTTP(season.episodes, 'unwatch', series);
+
+       $rootScope.$broadcast('SeasonEvent', {'series': data.series, 'action': 'unwatch'});
+       toHTTP(data, 'unwatch');
     }
 
     // TO BE IMPLEMENTED
     // IMPROVEMENT: Pass entire season and series_id
-    var toHTTP = function(items, action, series) {
+    var toHTTP = function(data, action) {
     	var ids = [];
-    	for (var i = 0; i < items.length; i++) {
-    		ids.push(items[i].tvdb_id);
+    	for (var i = 0, ep; ep = data.season.episodes[i]; i++) {
+    		ids.push(ep.tvdb_id);
     	};
         return please[action]({tvdb_id: ids}, 
         function() {
             console.log('Season --> toHTTP --> SUCCESS');
-            $rootScope.$broadcast('SeriesEvent', {'item': series, 'action': action});
+            $rootScope.$broadcast('SeriesEvent', {'series': data.series, 'action': action});
         },
         function(e) {
             console.log('Season --> toHTTP --> FAIL',e);
-            $rootScope.$broadcast('SeriesEvent', {'item': series, 'action': action});
+            $rootScope.$broadcast('SeriesEvent', {'series': data.series, 'action': action});
             //toActionList(e);
         });
     }
@@ -58,8 +59,9 @@ angular.module('tvshowmarkApp')
             item: the season
         }
     */
-    $rootScope.$on('SeasonEvent', function(ev, data) {
-        console.log('SeasonEvent', data);
+    /*
+    $rootScope.$on('EpisodeEvent', function(ev, data) {
+        console.log('EpisodeEvent', data);
         switch(data.action) {
             case 'watch':
                 watch_episodes(data.item, data.series);
@@ -69,9 +71,11 @@ angular.module('tvshowmarkApp')
             break;
         }
     });
-
+    */
     return {
     	user: user,
-    	status: status
+    	status: status,
+        watch: watch,
+        unwatch: unwatch
     }
 });

@@ -72,6 +72,15 @@ module.exports = function (grunt) {
               context: '/api/v1/user/dashboard/',
               host: 'http://0.0.0.0:9000/mock/dashboard.json'
               
+          },
+          {
+              context: '/api/v1/auth/',
+              host: 'app.tvshowmark.it',
+              headers: {
+                  'host': 'app.tvshowmark.it',
+                  'referer': ""
+              }
+              
           }
       ],
       livereload: {
