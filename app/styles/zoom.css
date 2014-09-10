@@ -4,9 +4,14 @@
 	left: 5px;
 }
 
+/*
+button.watch-action {
+	width: 42px;
+	height: 42px;
+}
 .season .panel-heading .watch-action {
 	position: absolute;
-	right: 5px;
+	right: 0px;
 	margin-top: -6px;
 }
 .watch-action:after {
@@ -14,23 +19,40 @@
 	font-size: 50px;
 }
 
-episode.completed .watch-action:after {
-	content: '\f16e';
-	color: #3FD397;
-}
 
 season.complete .watch-action:after {
 	content: '\f16e';
 	color: #3FD397;
 }
+*/
+.panel-body {
+	padding: 5px;
+}
 
+#zoom button.watch-action {
+	width: 42px;
+	height: 42px;
+	right: 0;
+	position: absolute;
+	font-size: 50px;
+}
+#zoom button.watch-action:after {
+	content: '\f16d';
+}
+.season .panel-heading button.watch-action {
+	margin-top: -6px;
+}
+
+#zoom episode.complete .watch-action:after {
+	content: '\f16e';
+	color: #3FD397;
+}
 
 /***** DETAILS  ******/
 #showHeader {
 	height: 184px;
 	position: relative;
 	background-color: #444;
-	margin-top: 44px;
 	background-size: 100%;
 }
 .title-bar {

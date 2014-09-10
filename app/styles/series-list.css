@@ -17,11 +17,38 @@
 	-moz-border-radius: 9px 0px 0px 9px;
 	-webkit-border-radius: 9px 0px 0px 9px;
 }
-.watching .series-badge:before {
+
+.series-badge.left:before {
+	width: 85px;
+	left: 0; right: inherit;
+	margin-top: 57px;
+	border-radius: 0px 8px 8px 0px;
+	-moz-border-radius: 0px 8px 8px 0px;
+	-webkit-border-radius: 0px 8px 8px 0px;
+}
+
+series a.Dropped .series-badge:before {
 	display: inline-block;
-	background-color: #3FD397;
+	background-color: #FC7D79;
+	content: 'Dropped';
+}
+series a.Completed .series-badge:before {
+	display: inline-block;
+	background-color:  #03C03C;
+	content: 'Completed';
+}
+series a.Watching .series-badge:before {
+	display: inline-block;
+	background-color:  #3fd397;
 	content: 'Watching';
 }
+series a.Planned .series-badge:before {
+	display: inline-block;
+	background-color:  #29c8c4;
+	content: 'Planned';
+}
+
+
 
 .item h2 {
 	white-space: normal;

@@ -2,5 +2,5 @@
   	<img class="series-thumb" ng-src="{{item.thumb}}">
 	<h2>{{item.title}}</h2>
 	<h6>{{item.user.status}}</h6>
-	<div class="series-badge"></div>
+	<div ng-show="item.user.status" class="series-badge"></div>
 </a>

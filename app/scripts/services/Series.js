@@ -26,7 +26,7 @@ angular.module('tvshowmarkApp')
     }
 
     var get = function(id) {
-        id = 79216; // todo:dev
+        id = 121361; // todo:dev
         memData[id] = fromMEM(id) || fromLS(id);
         if (!memData[id]) memData[id] = fromHTTP(id);
         return memData[id];

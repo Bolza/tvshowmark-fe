@@ -3,7 +3,8 @@
 angular.module('tvshowmarkApp')
 .factory('Tops', function Tops($resource, $rootScope, $window) {
     var memData;
-    var remoteUrl = '/api/v1/tvshow/top/';
+    var dom = 'http://app.tvshowmark.it';
+    var remoteUrl = dom+'/api/v1/tvshow/top/';
     var name = 'Tops';
     var please = $resource(remoteUrl, {}, {
         get: {method: 'GET'}
@@ -16,7 +17,7 @@ angular.module('tvshowmarkApp')
     }
 
     var get = function() {
-        var mem = fromMEM() || fromLS();
+        var mem;// = fromMEM() || fromLS();
         if (!mem) mem = fromHTTP();
         return mem;
     }
@@ -39,10 +40,15 @@ angular.module('tvshowmarkApp')
     }
     var fromHTTP = function() {
         //console.log('Tops <-- fromHTTP');
-        return please.get(function(res) {
-            toMEM(res);
-            toLS(res)
-        }, toActionList);
+        return please.get(
+            function success(res) {
+                console.log('success',res);
+                toMEM(res);
+                toLS(res);
+            },
+            function failed(res) {
+                console.log('failed: '+JSON.stringify(res));
+            });
     }
     var fromLS = function() {
         //console.log('Tops <-- fromLS');

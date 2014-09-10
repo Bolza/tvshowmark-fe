@@ -42,9 +42,8 @@
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 }
-.watching .dash-tabs .dash-tab#watching:before {display: block;}
-.plan  .dash-tabs .dash-tab#planned:before   {display: block;}
-.history .dash-tabs .dash-tab#history:before   {display: block;}
-
+#dashboard.watching .dash-tabs .dash-tab#watching:before {display: block;}
+#dashboard.plan  .dash-tabs .dash-tab#planned:before   {display: block;}
+#dashboard.history .dash-tabs .dash-tab#history:before   {display: block;}
 
 #dashboard .series-badge { display: none; }

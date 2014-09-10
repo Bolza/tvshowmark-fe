@@ -1,5 +1,6 @@
-<ion-item class="episode item-icon-left item-button-right">
+<ion-item class="item-icon-left item-button-right">
 	<span class="left-badge badge">{{item.episode}}</span>
 	<h2>{{item.title}}</h2> 
-	<button class="button watch-action ionicons" ng-click="swatch()"></button>
-</ion-item>
+	<div ng-hide="item.aired" ng-show="item.first_aired"> {{item.aired}} - {{item.first_aired}}</div>
+	<button class="button watch-action ionicons" ng-click="swatch()" ng-show="item.aired"></button>
+</ion-item> 

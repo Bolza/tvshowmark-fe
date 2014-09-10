@@ -12,7 +12,7 @@ angular.module('tvshowmarkApp')
 		link: function postLink(scope, element, attrs) {
 			//avviene sia al watch manuale che a quello imposto dai WatchAll (Season e Series)
 			var d1 = scope.$watch('item.user.watched', function() {
-				scope.item.user.watched ? element.addClass('completed') : element.removeClass('completed');
+				scope.item.user.watched ? element.addClass('complete') : element.removeClass('complete');
 			});
 			scope.swatch = function() {
 				if (!scope.item.user.watched) {

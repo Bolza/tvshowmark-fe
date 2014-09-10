@@ -1,14 +1,28 @@
-<div class="page home">
-		<h3>My Title: {{title}}</h3>
-		
-		<img class="home-logo" src="images/logo.png"></img>
-		<img class="home-logo" src="images/help-home.png"></img>
 
-		<button class="button login" ng-click="startLogin()">LOGIN</button>
-		<a onclick="location.href='/api/v1/auth/login/facebook/?next=/'">
-			<span class="social-icon ion-social-facebook"></span>
-		</a>
-		<a onclick="location.href='/api/v1/auth/login/google-oauth2/?next=/'">
-			<span class="social-icon ion-social-googleplus"></span>
-		</a>
+<div id="home" class="page home" ng-controller="HomeCtrl">
+
+	<header class="bar bar-header">
+        <button menu-toggle="left" ng-click="sideMenuController.toggleLeft()" class="ionicon ion-search left"></button>
+        <button menu-toggle="right" ng-click="sideMenuController.toggleRight()" class="ionicon ion-person right"></button>
+    </header>
+
+	<ion-view>
+		<ion-content has-header="true" class="">	
+			
+			<h3>My Title: {{title}}</h3>
+			
+			<img class="home-logo" src="images/logo.png"></img>
+			<img class="home-logo" src="images/help-home.png"></img>
+
+			<button class="button login" ng-click="startLogin()">LOGIN</button>
+			<a onclick="location.href='/api/v1/auth/login/facebook/?next=/'">
+				<span class="social-icon ion-social-facebook"></span>
+			</a>
+			<a onclick="location.href='/api/v1/auth/login/google-oauth2/?next=/'">
+				<span class="social-icon ion-social-googleplus"></span>
+			</a>
+			
+		</ion-content>
+	</ion-view>
+
 </div>

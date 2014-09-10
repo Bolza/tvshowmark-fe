@@ -12,8 +12,9 @@ angular.module('tvshowmarkApp')
 	
 	$scope.onTabSelected = function(type) {
 		$scope.dashType = type.toLowerCase();
-		if (selectedTab) $window.document.body.classList.remove(selectedTab);
-		$window.document.body.classList.add($scope.dashType);
+		var tab = $window.document.querySelector('#dashboard');
+		if (selectedTab) tab.classList.remove(selectedTab);
+		tab.classList.add($scope.dashType);
 		selectedTab = $scope.dashType;
 
 		//var filterText = selectedTab == 'history' ? filterText = 'drop' : filterText = selectedTab;
@@ -31,7 +32,7 @@ angular.module('tvshowmarkApp')
 
 .filter('statusFilter', function() {
     return function(list, wantedStatus) {
-    	if (!list) return;
+    	if (!list) return [];
     	wantedStatus = wantedStatus.toLowerCase();
     	var newList = [];
     	for(var i=0, item; item = list[i]; i++) {

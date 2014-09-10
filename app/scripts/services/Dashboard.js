@@ -3,10 +3,10 @@
 angular.module('tvshowmarkApp')
 .factory('Dashboard', function Dashboard($resource, $rootScope, $window) {
     var memData;
-    var remoteUrl = '/api/v1/user/:action/';
+    var remoteUrl = '/api/v1/user/dashboard/watching';
     var name = 'Dashboard';
     var please = $resource(remoteUrl, {}, {
-        get: {method: 'GET', params: {action: 'dashboard'}}
+        get: {method: 'GET'}
     });
 
     var getIndexOf = function(id) {
